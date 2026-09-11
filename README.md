@@ -1,6 +1,10 @@
+[English](README.md) | [Русский](README.ru.md)
+
 # VLAN Troubleshooting Guide
 [![CI](https://github.com/uMax-Cyber/VLANscope/actions/workflows/ci.yml/badge.svg)](https://github.com/uMax-Cyber/VLANscope/actions/workflows/ci.yml)
 
+
+![Demo](screenshots/demo.svg)
 Practical guide to diagnosing VLAN issues in multi-vendor environments (UniFi switches, Sophos firewalls, Linux bridges). Covers native/tagged mismatch detection, trunk verification, and DHCP-across-VLAN debugging.
 
 ## Common VLAN Problems (with solutions)
