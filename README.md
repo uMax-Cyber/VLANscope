@@ -1,0 +1,43 @@
+# VLAN Troubleshooting Guide
+
+Practical guide to diagnosing VLAN issues in multi-vendor environments (UniFi switches, Sophos firewalls, Linux bridges). Covers native/tagged mismatch detection, trunk verification, and DHCP-across-VLAN debugging.
+
+## Common VLAN Problems (with solutions)
+
+### 1. Native VLAN Mismatch
+**Symptom**: Devices get IPs from wrong subnet. Intermittent connectivity.
+**Cause**: Switch port native VLAN ≠ device expectation.
+**Fix**: Audit all ports — native VLAN should match the untagged traffic on that port.
+
+### 2. DHCP Not Crossing VLANs
+**Symptom**: Devices on one VLAN can't get DHCP from server on another.
+**Cause**: Either no DHCP relay, or firewall blocking UDP 67/68 between VLANs.
+**Fix**: Check relay config on gateway; verify firewall rules for DHCP ports.
+
+### 3. Trunk Missing VLAN Tags
+**Symptom**: Some VLANs work, others don't — same physical link.
+**Cause**: Trunk port not allowing all needed VLANs (tagged_vlan_mgmt = block_all).
+**Fix**: Explicitly allow needed VLANs on trunk ports.
+
+### 4. Static Lease in Wrong Scope
+**Symptom**: One specific device stuck on "connecting..." while others work.
+**Cause**: Device has static DHCP reservation in VLAN-A's scope but connects to VLAN-B.
+**Fix**: Move the reservation to the correct scope (or make it global).
+
+## Diagnosis Tools
+
+```bash
+# Check what VLANs are actually on a trunk
+tcpdump -lni <iface> vlan -c 20
+
+# Verify DHCP relay path
+# On gateway: check DHCP relay config for each VLAN interface
+
+# Test from specific VLAN (create temp subinterface)
+ip link add link eth0 name eth0.XXX type vlan id XXX
+ip link set eth0.XXX up
+dhclient eth0.XXX
+```
+
+## License
+MIT
