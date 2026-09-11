@@ -13,6 +13,14 @@
 ![Demo](screenshots/demo.svg)
 Practical guide to diagnosing VLAN issues in multi-vendor environments (UniFi switches, Sophos firewalls, Linux bridges). Covers native/tagged mismatch detection, trunk verification, and DHCP-across-VLAN debugging.
 
+## ✨ Features
+
+- **Native/tagged mismatch detection** — find ports where the native VLAN doesn't match untagged traffic
+- **Trunk verification** — confirm which VLANs actually cross a trunk link
+- **DHCP-across-VLAN debugging** — relay and firewall checks for UDP 67/68
+- **Multi-vendor coverage** — UniFi, Sophos, and Linux bridges in one guide
+- **Copy-paste diagnosis commands** — ready-to-use `tcpdump` / `ip` recipes
+
 ## Common VLAN Problems (with solutions)
 
 ### 1. Native VLAN Mismatch
